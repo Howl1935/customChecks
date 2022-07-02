@@ -1,0 +1,8 @@
+---
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_redshift_cluster"
+  attribute: "automated_snapshot_retention_period"
+  operator: "not_equals"
+  value: "0"
