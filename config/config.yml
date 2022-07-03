@@ -1,0 +1,20 @@
+branch: master
+check:
+- CKV_AWS_28
+- CKV2_AWS_16
+- CKV_AWS_66
+- CKV_AWS_228
+- CKV_AWS_250
+- CKV_AWS_16
+- CKV_AWS_21
+- CKV_AWS_18
+directory:
+- .
+download-external-modules: false
+evaluate-variables: true
+external-checks-git:
+- https://github.com/Howl1935/customChecks
+external-modules-download-path: .external_modules
+framework:
+- all
+run-all-external-checks: true
