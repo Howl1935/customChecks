@@ -7,8 +7,8 @@ metadata:
 scope:
  provider: "aws"
 definition:
-    - cond_type: "attribute"
-      resource_types:
+    cond_type: "attribute"
+    resource_types:
         - "all"
-      attribute: "tags.env"
-      operator: "exists"
+    attribute: "tags.env"
+    operator: "exists"
