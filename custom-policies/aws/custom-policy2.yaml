@@ -1,25 +1,14 @@
 ---
 metadata:
-  name: "Check that all encrypted RDS clusters are tagged with encrypted: true"
-  id: "CKV2_AWS_1"
-  category: "SECRETS"
+ name: "Check that all resources are tagged with the key - env"
+ id: "CKV2_AWS_1"
+ category: "GENERAL_SECURITY"
+ severity: "info"
+scope:
+ provider: "aws"
 definition:
-  and:
     - cond_type: "attribute"
       resource_types:
-        - "aws_rds_cluster"
-      attribute: "tags.encrypted"
-      operator: "equals"
-      value: "true"
-    - or:
-        - cond_type: "attribute"
-          resource_types:
-            - "aws_rds_cluster"
-          attribute: "kms_key_id"
-          operator: "exists"
-        - cond_type: "attribute"
-          resource_types:
-            - "aws_rds_cluster"
-          attribute: "storage_encrypted"
-          operator: "equals"
-          value: "true"
+        - "all"
+      attribute: "tags.env"
+      operator: "exists"
