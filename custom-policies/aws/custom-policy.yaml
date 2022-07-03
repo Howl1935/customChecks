@@ -14,5 +14,5 @@ definition:
     - cond_type: "attribute"
       resource_types:
         - "all"
-      attribute: "tags.yor_trace"
+      attribute: "tags.env"
       operator: "exists"
