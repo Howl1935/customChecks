@@ -12,8 +12,8 @@ directory:
 - .
 download-external-modules: false
 evaluate-variables: true
-external-checks-git:
-- https://github.com/Howl1935/customChecks
+external-checks-dir:
+- /customChecks/config.yml
 external-modules-download-path: .external_modules
 framework:
 - all
