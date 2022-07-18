@@ -13,7 +13,7 @@ directory:
 download-external-modules: false
 evaluate-variables: true
 external-checks-dir:
-- /customChecks/config.yml
+- /customChecks/custom-policies
 external-modules-download-path: .external_modules
 framework:
 - all
