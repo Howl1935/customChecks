@@ -1,0 +1,38 @@
+# Deploy clusters using T3 instances or non-burstable instance types for production workloads
+# Notes: Confirm that these instances are the correct ones to avoid and there aren't others.  Also, can we define production workloads?
+
+# reference:
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster
+# https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html
+
+# checkov custom policy reference:
+# https://www.checkov.io/3.Custom%20Policies/YAML%20Custom%20Policies.html
+# https://www.checkov.io/3.Custom%20Policies/Examples.html
+
+---
+metadata:
+ name: "Ensure clusters are deployed using T3 instances or non-burstable instance types for production workloads"
+ id: "CKV_IBT_002"
+ category: "GENERAL_SECURITY"
+definition:
+ and:
+ - cond_type: "attribute"
+   resource_types:
+    - "aws_elasticache_cluster"
+   attribute: "node_type"
+   operator: "not_equals"
+   value: "cache.t2.medium"
+ - cond_type: "attribute"
+   resource_types:
+   - "aws_elasticache_cluster"
+   attribute: "node_type"
+   operator: "not_equals"
+   value: "cache.t2.small"
+ - cond_type: "attribute"
+   resource_types:
+   - "aws_elasticache_cluster"
+   attribute: "node_type"
+   operator: "not_equals"
+   value: "cache.t2.micro"
+
+
