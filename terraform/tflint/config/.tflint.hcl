@@ -1,5 +1,5 @@
 config {
-  disabled_by_default = true
+  disabled_by_default = false
   # other options here...
 }
 plugin "aws" {
