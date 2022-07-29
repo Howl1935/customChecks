@@ -34,6 +34,8 @@ class RDSClusterInstanceUpgrade(BaseResourceCheck):
             instance_class = conf['instance_class'][0]
             if instance_class not in target_instances: 
                 return CheckResult.FAILED
+            if instance_class == 'db.r3.large':
+                return CheckResult.FAILED
         if 'db_cluster_instance_class' in conf.keys():
             instance_class = conf['db_cluster_instance_class'][0]
             if instance_class not in target_instances: 
