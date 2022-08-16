@@ -41,5 +41,4 @@ class RDSClusterInstanceUpgrade(BaseResourceCheck):
                  return CheckResult.FAILED
         return CheckResult.PASSED
 
-
 check = RDSClusterInstanceUpgrade()

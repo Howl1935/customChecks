@@ -17,7 +17,8 @@ To discover more checks visit [this link](https://www.checkov.io/5.Policy%20Inde
 |CKV_AWS_250|`Ensure that RDS PostgreSQL instances use a non vulnerable version with the log_fdw extension (https://aws.amazon.com/security/security-bulletins/AWS-2022-004/)`            			                                             |    
 |CKV_AWS_21|`Ensure all data stored in the S3 bucket have versioning enabled`            			 |    
 |CKV_AWS_18|`Ensure the S3 bucket has access logging enabled`            			                 |    
-
+## To Create a new config start here:
+checkov -d . CKV_AWS_28 CKV2_AWS_16 CKV_AWS_66 CKV_AWS_228 CKV_AWS_250 CKV_AWS_16 CKV_AWS_21 CKV_AWS_18 --skip-framework json --external-checks-dir ./customChecks/terraform/checkov/custom-policies/ --quiet --create-config config.yml
 
 ## Helpful links
 More information on checkov command line arguments[link] (https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html)
