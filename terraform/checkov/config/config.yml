@@ -5,7 +5,6 @@ check:
 - CKV_AWS_66
 - CKV_AWS_228
 - CKV_AWS_250
-- CKV_AWS_16
 - CKV_AWS_21
 - CKV_AWS_18
 - CKV_AWS_96
@@ -17,5 +16,7 @@ external-checks-dir:
 - ./customChecks/terraform/checkov/custom-policies/
 external-modules-download-path: .external_modules
 framework:
-- all
+- terraform
+- terraform_plan
+quiet: true
 run-all-external-checks: true
