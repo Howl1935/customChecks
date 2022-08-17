@@ -1,9 +1,9 @@
 # IBSCA-CLI Policies
 
-This is the main repo where cloud infra at Ibotta will be able to manage policies and implementation for IBSCA.
+This is cloudinfra at at Ibotta's launching point for customizing checks and policies run by IBSCA-CLI.
 
 ## /language/package/config
-If package supports a config, this is where we will find it.  This is our configuration for the package will run.  Instead of having our developers write extensive command line arguments they can use **ibsca run** which will load our config and execute the functionality the cloud-infra team deems necessary.  
+If package supports a config, this is where it is found.  This is our configuration for the package will run.  Instead of having our developers write extensive command line arguments they can use **ibsca run** which will load our config and execute the functionality the cloud-infra team deems necessary.  
 
 For more information visit this [link](https://bridgecrew.io/blog/checkov-config-file-repeatably-support-multiple-environments/).
 
