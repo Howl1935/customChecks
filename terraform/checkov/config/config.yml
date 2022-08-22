@@ -10,7 +10,7 @@ check:
 - CKV_AWS_96
 directory:
 - .
-download-external-modules: false
+download-external-modules: true
 evaluate-variables: true
 external-checks-dir:
 - ./customChecks/terraform/checkov/custom-policies/
