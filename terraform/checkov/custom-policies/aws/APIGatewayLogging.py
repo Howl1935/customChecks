@@ -6,7 +6,7 @@ class APIGatewayLogging(BaseResourceCheck):
     def __init__(self):
         name = "Ensure RDS instances are configured for at least 3 AZs.  Also add at least one reader node for Aurora clusters."
         id = "CKV_IBT_010"
-        supported_resources = ['aws_rds_cluster']
+        supported_resources = ['aws_api_gateway_method_settings']
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
         super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
