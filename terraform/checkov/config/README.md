@@ -14,24 +14,17 @@ For more information visit this [link](https://bridgecrew.io/blog/checkov-config
 
 To discover more checks visit [this link](https://www.checkov.io/5.Policy%20Index/terraform.html)
 
-| |Description |
-
-|----------------|-------------------------------|
-
-|CKV_AWS_28|`Ensure Dynamodb point in time recovery (backup) is enabled` |
-
-|CKV2_AWS_16|`Ensure that Auto Scaling is enabled on your DynamoDB tables` |
-
-|CKV_AWS_66|`Ensure that CloudWatch Log Group specifies retention days` |
-
+|                |Description                      						  |
+|----------------|--------------------------------------------------------|
+|CKV_AWS_28|`Ensure Dynamodb point in time recovery (backup) is enabled`  |
+|CKV2_AWS_16|`Ensure that Auto Scaling is enabled on your DynamoDB tables`|
+|CKV_AWS_66|`Ensure that CloudWatch Log Group specifies retention days`   |
 |CKV_AWS_228|`Verify Elasticsearch domain is using an up to date TLS policy` |
-
 |CKV_AWS_250|`Ensure that RDS PostgreSQL instances use a non vulnerable version with the log_fdw extension (https://aws.amazon.com/security/security-bulletins/AWS-2022-004/)` |
-
 |CKV_AWS_21|`Ensure all data stored in the S3 bucket have versioning enabled` |
+|CKV_AWS_18|`Ensure the S3 bucket has access logging enabled`             |
+|CKV_AWS_96|`RDS - Check encryption at rest for database cluster`         |
 
-|CKV_AWS_18|`Ensure the S3 bucket has access logging enabled` |
-|CKV_AWS_96|`RDS - Check encryption at rest for database cluster` |
 
 ## To Create a new config start here:
 

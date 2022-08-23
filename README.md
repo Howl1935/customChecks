@@ -36,8 +36,9 @@ The policies are written in yaml and python.
 ## Add a new plugin
 1. Create a new folder within the language of your choice.  Name this folder the title of the plugin in lowercase letters.
 2. Add two folders: `config` and `custom-policies`
-3. Within the config folder add your `config file`.  Also add a `README.md` and document any customizations you implement.
-4. Within the custom-policies add any `custom policies` your plugin supports.  Also add a `README.md` and document any customizations you implement.
+3. Within the config folder add your `config file`.  Also add a `README.md` and document any customizations you implement.  [EXAMPLE](https://github.com/ibotta/custom-checks/terraform/checkov/config)
+4. Within the custom-policies add any `custom policies` your plugin supports.  Also add a `README.md` and document any customizations you implement. [EXAMPLE](https://github.com/ibotta/custom-checks/terraform/checkov/custom-policies)
 5. Commit and push changes.
+
 
 
