@@ -22,6 +22,8 @@ class DAXminAvailZones(BaseResourceCheck):
         
         if self.entity_type == 'aws_dax_cluster':
             if 'availability_zones' in conf.keys():
+                #self.name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads."
+                self.name = conf['cluster_name']
                 #availability_zones = conf['availability_zones']
                 return CheckResult.PASSED
         return CheckResult.FAILED
