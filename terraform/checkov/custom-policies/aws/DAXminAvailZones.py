@@ -3,9 +3,9 @@ from checkov.common.models.enums import CheckResult, CheckCategories
 
 class DAXminAvailZones(BaseResourceCheck):
     def __init__(self):
-        name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads."
+        name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#availability_zones"
         id = "CKV_IBT_001"
-        supported_resources = ['aws_dax_cluster', 'aws_dax_subnet_group']
+        supported_resources = ['aws_dax_cluster',]
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
         super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
@@ -19,6 +19,7 @@ class DAXminAvailZones(BaseResourceCheck):
             If we are looking at a aws_dax_subnet_group resource, then we check the subnet_ids key and make sure that the value contains 'private_subnets' since that is
             how Ibotta defines 3 AZs.
         """
+        
         if self.entity_type == 'aws_dax_cluster':
             if 'availability_zones' in conf.keys():
                 #availability_zones = conf['availability_zones']
