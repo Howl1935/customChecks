@@ -3,7 +3,7 @@ from checkov.common.models.enums import CheckResult, CheckCategories
 
 class DAXminAvailZones(BaseResourceCheck):
     def __init__(self):
-        name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#availability_zones"
+        name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. \nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#availability_zones"
         id = "CKV_IBT_001"
         supported_resources = ['aws_dax_cluster',]
         # Look at checkov/common/models/enums.py for options
