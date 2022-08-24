@@ -30,7 +30,7 @@ class APIGatewayStageLogging(BaseResourceCheck):
                         self.name = "Consider enabling execution logs for this API Gateway Production Stage."  
                         return CheckResult.PASSED
                     else:
-                        self.name = "logging_level must be \"INFO\" or \"ERROR\" your resource has specified " + logging_block[0] + "\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method_settings#logging_level"
+                        self.name = "Logging_level must be \"INFO\" or \"ERROR\" your resource has specified \"" + logging_block[0] + "\"\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method_settings#logging_level"
                         return CheckResult.FAILED
             return CheckResult.FAILED
         
