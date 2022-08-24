@@ -9,7 +9,7 @@ class ElasticacheRedisVersion(BaseResourceCheck):
     def __init__(self):
         name = "Ensure Redis version is up to date to leverage a more modern feature set"
         id = "CKV_IBT_003"
-        supported_resources = ['aws_elasticache_cluster']
+        supported_resources = ['aws_elasticache_cluster', 'aws_elasticache_replication_group']
         categories = [CheckCategories.CONVENTION]
         super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
 

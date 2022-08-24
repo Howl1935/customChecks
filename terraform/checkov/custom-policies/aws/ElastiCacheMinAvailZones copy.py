@@ -1,3 +1,4 @@
+from lib2to3.pgen2.pgen import DFAState
 from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck
 from checkov.common.models.enums import CheckResult, CheckCategories
 
@@ -18,18 +19,16 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
             
             https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group
         """
+        # first make sure that it is a redis cluster with cluster mode enabled
+        # then make sure that multi-az is enabled
         if self.entity_type == 'aws_elasticache_replication_group':
-            if 'cluster_mode' in conf.keys() or 'replicas_per_node_group' in conf.keys() and 'num_node_groups' in conf.keys():
-                if "subnet_group_name" in conf.keys():
-                    self.name = 'ElastiCache clusters have cluster mode enabled, and have a subnet_group_name'
-                    return CheckResult.PASSED
-            return CheckResult.FAILED
-
-        if self.entity_type == 'aws_elasticache_subnet_group':
-            if 'subnet_ids' in conf.keys():
-                self.name = 'Elasticache has a subnet_id.  Please ensure that ' + conf['subnet_ids'] + ' has 3 AZs.'
+            if 'parameter_group_name' in conf.keys():
+                param_data = conf['parameter_group_name'].split('.')
+                if param_data[len(param_data) - 2] == 'cluster' and param_data[len(param_data) - 1] == 'on':
+                    if 'preferred_cache_cluster_azs' in conf.keys():
+                        # still have to figure out how to make it count AZs
+                        return CheckResult.PASSED
+                    return CheckResult.FAILED
                 return CheckResult.PASSED
-            return CheckResult.FAILED
-
 
 scanner = ElastiCacheMinAvailZones()

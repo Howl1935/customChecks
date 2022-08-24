@@ -20,19 +20,27 @@ class DAXminAvailZones(BaseResourceCheck):
             how Ibotta defines 3 AZs.
         """
         if self.entity_type == 'aws_dax_cluster':
-            if "subnet_group_name" in conf.keys():
-                subnet_group_name = conf["subnet_group_name"][0].split('.')
-                if 'aws_dax_subnet_group' in subnet_group_name:
-                    self.name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. aws_dax_cluster is connected to aws_dax_subnet_group"
-                    return CheckResult.PASSED
-                return CheckResult.FAILED
+            if 'availability_zones' in conf.keys():
+                #availability_zones = conf['availability_zones']
+                return CheckResult.PASSED
+        return CheckResult.FAILED
 
-        if self.entity_type == 'aws_dax_subnet_group':
-            if 'subnet_ids' in conf.keys():
-                subnet_ids = conf['subnet_ids'][0][1].split('.')
-                if 'private_subnets' in subnet_ids:
-                    self.name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. aws_dax_subnet_group has private_subnets"
-                    return CheckResult.PASSED
-                return CheckResult.FAILED
+
+        # Below is implementation of this check where we examine the private subnets.  Above, I am writing it explicitly aligned to the recommendations on terraform's docs
+        # if self.entity_type == 'aws_dax_cluster':
+        #     if "subnet_group_name" in conf.keys():
+        #         subnet_group_name = conf["subnet_group_name"][0].split('.')
+        #         if 'aws_dax_subnet_group' in subnet_group_name:
+        #             self.name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. aws_dax_cluster is connected to aws_dax_subnet_group"
+        #             return CheckResult.PASSED
+        #         return CheckResult.FAILED
+
+        # if self.entity_type == 'aws_dax_subnet_group':
+        #     if 'subnet_ids' in conf.keys():
+        #         subnet_ids = conf['subnet_ids'][0][1].split('.')
+        #         if 'private_subnets' in subnet_ids:
+        #             self.name = "Ensure DAX clusters are configured with at least 3 AZs for production workloads. aws_dax_subnet_group has private_subnets"
+        #             return CheckResult.PASSED
+        #         return CheckResult.FAILED
 
 scanner = DAXminAvailZones()
