@@ -19,7 +19,7 @@ class APIGatewayStageLogging(BaseResourceCheck):
                 settings_block = conf['settings']
                 if 'logging_level' in settings_block[0]:
                     logging_block = settings_block[0]['logging_level']
-                    #self.name = logging_block[0]
+                    self.name = logging_block[0]
                     if logging_block in [['OFF'], ['INFO'], ['ERROR'], ['var.log_level']]:
                         return CheckResult.PASSED
         
