@@ -32,6 +32,7 @@ class ElasticacheRedisVersion(BaseResourceCheck):
                 if 'engine_version' in conf.keys():
                     engine_version = conf['engine_version'][0]
                     if version.parse(engine_version) < version.parse(latest_redis_version): 
+                        self.name = "Ensure Redis version is up to date to leverage a more modern feature set.  You have entered " + conf['engine_version'][0] + " whereas the latest version is: " + latest_redis_version + ".\nhttps://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html"
                         return CheckResult.FAILED
         return CheckResult.PASSED
 
