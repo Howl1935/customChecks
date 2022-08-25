@@ -29,9 +29,9 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
                     if 'cluster_mode' in conf.keys():
                         # still have to figure out how to make it count AZs
                         if 'preferred_cache_cluster_azs' in conf.keys():
-                            if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs']:
-                                if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled']:
-                                    if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'] >= 2:
+                            if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs'][0]:
+                                if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled'][0]:
+                                    if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'][0] >= 2:
                                         return CheckResult.PASSED
                                     self.name = "ElasticCache cluster mode is enabled, please make sure num_cache_clusters attribute is >= 2 and that 3 AZs are defined."
                                     return CheckResult.FAILED 
