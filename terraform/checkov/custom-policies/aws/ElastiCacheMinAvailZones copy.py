@@ -23,7 +23,7 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
         # then make sure that multi-az is enabled
         if self.entity_type == 'aws_elasticache_replication_group':
             if 'parameter_group_name' in conf.keys():
-                param_data = conf['parameter_group_name'].split('.')
+                param_data = conf['parameter_group_name'][0].split('.')
                 if param_data[len(param_data) - 2] == 'cluster' and param_data[len(param_data) - 1] == 'on':
                     if 'preferred_cache_cluster_azs' in conf.keys():
                         # still have to figure out how to make it count AZs
