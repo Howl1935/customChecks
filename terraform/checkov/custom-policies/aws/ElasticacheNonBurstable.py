@@ -29,7 +29,7 @@ class ElasticacheNonBurstable(BaseResourceCheck):
 
         if self.entity_type == 'aws_elasticache_replication_group' or self.entity_type == 'aws_elasticache_cluster':
             if 'node_type' in conf.keys():
-                node_type = conf['node_type']
+                node_type = conf['node_type'][0]
                 if node_type in latest_instances:
                     return CheckResult.PASSED
                 return CheckResult.FAILED
