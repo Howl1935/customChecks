@@ -3,7 +3,7 @@ from checkov.terraform.checks.resource.base_resource_check import BaseResourceCh
 from packaging import version
 
 # !!important -> Here is where we can define current version of redis:
-latest_redis_version = "4.3.4"
+latest_redis_version = "6.2"
 
 class ElasticacheRedisVersion(BaseResourceCheck):
     def __init__(self):

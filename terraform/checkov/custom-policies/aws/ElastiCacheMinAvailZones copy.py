@@ -24,9 +24,19 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
         if self.entity_type == 'aws_elasticache_replication_group':
             if 'parameter_group_name' in conf.keys():
                 param_data = conf['parameter_group_name'][0].split('.')
+                #check to make sure that this is an instance where clust mode is enabled.
                 if param_data[len(param_data) - 2] == 'cluster' and param_data[len(param_data) - 1] == 'on':
+                    # still have to figure out how to make it count AZs
                     if 'preferred_cache_cluster_azs' in conf.keys():
-                        # still have to figure out how to make it count AZs
+                        self.name = "ElasticCache cluster mode is enabled, please ensure that at least 3 AZs are defined."
+                        if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs']:
+                            if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled']:
+                                if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'] >= 2:
+                                    return CheckResult.PASSED
+                                self.name = "ElasticCache cluster mode is enabled, please make sure num_cache_clusters attribute is >= 2 and that 3 AZs are defined."
+                                return CheckResult.FAILED 
+                            self.name = "ElasticCache cluster mode is enabled, please add multi_az_enabled attribute." 
+                            return CheckResult.FAILED 
                         return CheckResult.PASSED
                     return CheckResult.FAILED
                 return CheckResult.PASSED
