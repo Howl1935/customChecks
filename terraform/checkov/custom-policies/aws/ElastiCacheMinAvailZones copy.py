@@ -29,7 +29,7 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
                     if 'cluster_mode' in conf.keys():
                         # still have to figure out how to make it count AZs
                         if 'preferred_cache_cluster_azs' in conf.keys():
-                            if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs'][0]:
+                            if 'automatic_failover_enabled' in conf.keys() and conf['automatic_failover_enabled'][0]:
                                 if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled'][0]:
                                     if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'][0] >= 2:
                                         return CheckResult.PASSED
