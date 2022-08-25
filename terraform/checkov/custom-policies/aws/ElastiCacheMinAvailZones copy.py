@@ -5,7 +5,7 @@ from checkov.common.models.enums import CheckResult, CheckCategories
 
 class ElastiCacheMinAvailZones(BaseResourceCheck):
     def __init__(self):
-        name = "Ensure ElastiCache clusters are configured with at least 3 AZs."
+        name = "Ensure ElastiCache clusters are configured with at least 3 AZs.\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group"
         id = "CKV_IBT_004"
         supported_resources = ['aws_elasticache_replication_group']
         # Look at checkov/common/models/enums.py for options
@@ -24,20 +24,24 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
         if self.entity_type == 'aws_elasticache_replication_group':
             if 'parameter_group_name' in conf.keys():
                 param_data = conf['parameter_group_name'][0].split('.')
-                #check to make sure that this is an instance where clust mode is enabled.
+                #check to make sure that this is an instance where cluster mode is enabled.
                 if param_data[len(param_data) - 2] == 'cluster' and param_data[len(param_data) - 1] == 'on':
-                    # still have to figure out how to make it count AZs
-                    if 'preferred_cache_cluster_azs' in conf.keys():
-                        self.name = "ElasticCache cluster mode is enabled, please ensure that at least 3 AZs are defined."
-                        if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs']:
-                            if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled']:
-                                if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'] >= 2:
-                                    return CheckResult.PASSED
-                                self.name = "ElasticCache cluster mode is enabled, please make sure num_cache_clusters attribute is >= 2 and that 3 AZs are defined."
+                    if 'cluster_mode' in conf.keys():
+                        # still have to figure out how to make it count AZs
+                        if 'preferred_cache_cluster_azs' in conf.keys():
+                            if 'automatic_failover_cluster_azs' in conf.keys() and conf['automatic_failover_cluster_azs']:
+                                if 'multi_az_enabled' in conf.keys() and conf['multi_az_enabled']:
+                                    if 'num_cache_clusters' in conf.keys() and conf['num_cache_clusters'] >= 2:
+                                        return CheckResult.PASSED
+                                    self.name = "ElasticCache cluster mode is enabled, please make sure num_cache_clusters attribute is >= 2 and that 3 AZs are defined."
+                                    return CheckResult.FAILED 
+                                self.name = "ElasticCache cluster mode is enabled, please add \'multi_az_enabled\' attribute.\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group#multi_az_enabled" 
                                 return CheckResult.FAILED 
-                            self.name = "ElasticCache cluster mode is enabled, please add multi_az_enabled attribute." 
-                            return CheckResult.FAILED 
-                        return CheckResult.PASSED
+                            self.name = "ElasticCache cluster mode is enabled, however \'automatic_failover_cluster_azs\' must be set to true."    
+                            return CheckResult.FAILED
+                        self.name = "ElasticCache cluster mode is enabled, however multi-azs using \'preferred_cache_cluster_azs\' attribute is necessary.\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group#preferred_cache_cluster_azs"
+                        return CheckResult.FAILED
+                    self.name = "ElastiCache cluster mode is enabled, however \'cluster_mode\' is deprecated.  Please update resource per terraform documentation:\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group#cluster_mode"
                     return CheckResult.FAILED
                 return CheckResult.PASSED
 
