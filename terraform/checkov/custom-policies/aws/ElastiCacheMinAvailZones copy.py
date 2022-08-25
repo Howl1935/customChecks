@@ -26,7 +26,7 @@ class ElastiCacheMinAvailZones(BaseResourceCheck):
                 param_data = conf['parameter_group_name'][0].split('.')
                 #check to make sure that this is an instance where cluster mode is enabled.
                 if param_data[len(param_data) - 2] == 'cluster' and param_data[len(param_data) - 1] == 'on':
-                    if 'cluster_mode' in conf.keys():
+                    if 'cluster_mode' not in conf.keys():
                         # still have to figure out how to make it count AZs
                         if 'preferred_cache_cluster_azs' in conf.keys():
                             if 'automatic_failover_enabled' in conf.keys() and conf['automatic_failover_enabled'][0]:
