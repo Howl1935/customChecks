@@ -18,6 +18,9 @@ class APIGatewayStageLogging(BaseResourceCheck):
         Pass but warn on INFO
         Pass on ERROR
         """
+        if self.block_type == 'module':
+            self.name = "swampy"
+            return CheckResult.PASSED
         if self.entity_type == 'aws_api_gateway_method_settings': 
             if 'settings' in conf.keys():  
                 settings_block = conf['settings']
