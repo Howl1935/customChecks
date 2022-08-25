@@ -5,7 +5,7 @@ class APIGatewayStageLogging(BaseResourceCheck):
     def __init__(self):
         name = "Consider enabling execution logs for this API Gateway Production Stage.\nhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method_settings#logging_level"
         id = "CKV_IBT_010"
-        supported_resources = ['aws_api_gateway_method_settings']
+        supported_resources = ['aws_api_gateway_method_settings',"module"]
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.CONVENTION]
         super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
