@@ -18,7 +18,7 @@ class SFNLogging(BaseResourceCheck):
             if 'logging_configuration' in conf.keys():
                 logging_block = conf['logging_configuration'][0]
                 if 'include_execution_data' in logging_block and logging_block['include_execution_data'][0]:
-                    if 'level' in logging_block and logging_block['level'][0] in [['\"ALL\"'], ['ERROR'], ['FATAL'], ['OFF']]:
+                    if 'level' in logging_block and logging_block['level'][0] in [["ALL"], ["ERROR"], ["FATAL"], ["OFF"]]:
                         if logging_block['level'][0] == 'OFF':
                             self.name = "Enable CloudWatch logging if needed for this step function: Please ensure logging is not set to \'OFF\'."
                             return CheckResult.FAILED
