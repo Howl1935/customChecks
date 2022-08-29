@@ -24,6 +24,7 @@ class SFNLogging(BaseResourceCheck):
                             return CheckResult.FAILED
                         if 'log_destination' in logging_block:
                             return CheckResult.PASSED
+                    self.name = logging_block['level'][0]
                     return CheckResult.FAILED
                 self.name = logging_block['include_execution_data'][0] + " " + "Please consider enabling Cloudwatch Logging for your state function and confirm that logging_block attributes are correct: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html and https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sfn_state_machine#logging_configuration-configuration-block"
                 return CheckResult.FAILED
