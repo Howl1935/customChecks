@@ -17,6 +17,13 @@ class APIGatewayStageLogging(BaseResourceCheck):
         Fail on OFF
         Pass but warn on INFO
         Pass on ERROR
+
+        ### note for future development.  This check successfuly works on resources.  
+            There is still an issue with pulling modules; I would like to figure out how to check a module for a variable passed in 
+            by the developer BEFORE pulling modules.  For example: in some of Ibotta's repos a gateway is created using cloud infra's modules.
+            The default there for API gateway logging is "OFF".  When a dev calls the module, they define "default_stage_log_level"... I would like to
+            check THIS to verify that they are passing in the correct log flag.
+            Example: https://github.com/Ibotta/ipn-account-linking-framework/blob/main/terraform/modules/ipn-account-linking-framework/gateway.tf
         """
 
         if self.entity_type == 'aws_api_gateway_method_settings': 

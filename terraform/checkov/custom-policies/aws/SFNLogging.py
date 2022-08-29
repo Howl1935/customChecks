@@ -17,8 +17,10 @@ class SFNLogging(BaseResourceCheck):
         if self.entity_type == 'aws_sfn_state_machine':
             if 'logging_configuration' in conf.keys():
                 logging_block = conf['logging_configuration'][0]
+                if 'include_execution_data' in logging_block:
+                    return CheckResult.PASSED
                 # should we validate?
-                return CheckResult.PASSED
+                return CheckResult.FAILED
             self.name = "Please consider enabling Cloudwatch Logging for your state function: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html and https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sfn_state_machine#logging_configuration-configuration-block"
             return CheckResult.PASSED
         
