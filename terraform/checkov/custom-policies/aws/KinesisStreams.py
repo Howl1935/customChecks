@@ -9,7 +9,8 @@ class KinesisStreams(BaseResourceCheck):
         supported_resources = ['aws_kinesis_stream']
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
-        super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
+        super().__init__(name=name, id=id, categories=categories,
+                         supported_resources=supported_resources)
 
     def scan_resource_conf(self, conf):
         """
@@ -22,7 +23,6 @@ class KinesisStreams(BaseResourceCheck):
             if 'shard_count' in conf.keys() and 'retention_period' in conf.keys():
                 return CheckResult.PASSED
             return CheckResult.FAILED
-
 
 
 scanner = KinesisStreams()

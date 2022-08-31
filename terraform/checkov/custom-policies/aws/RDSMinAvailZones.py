@@ -9,7 +9,8 @@ class RDSMinAvailZones(BaseResourceCheck):
         supported_resources = ['aws_rds_cluster']
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
-        super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
+        super().__init__(name=name, id=id, categories=categories,
+                         supported_resources=supported_resources)
 
     def scan_resource_conf(self, conf):
         """

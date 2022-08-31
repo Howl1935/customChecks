@@ -5,13 +5,16 @@ from packaging import version
 # !!important -> Here is where we can define current version of redis:
 latest_redis_version = "6.2"
 
+
 class ElasticacheRedisVersion(BaseResourceCheck):
     def __init__(self):
         name = "Ensure Redis version is up to date to leverage a more modern feature set"
         id = "CKV_IBT_003"
-        supported_resources = ['aws_elasticache_cluster', 'aws_elasticache_replication_group']
+        supported_resources = ['aws_elasticache_cluster',
+                               'aws_elasticache_replication_group']
         categories = [CheckCategories.CONVENTION]
-        super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
+        super().__init__(name=name, id=id, categories=categories,
+                         supported_resources=supported_resources)
 
     def scan_resource_conf(self, conf):
         """
@@ -31,8 +34,10 @@ class ElasticacheRedisVersion(BaseResourceCheck):
             if engine_type == 'redis':
                 if 'engine_version' in conf.keys():
                     engine_version = conf['engine_version'][0]
-                    if version.parse(engine_version) < version.parse(latest_redis_version): 
-                        self.name = "Ensure Redis version is up to date to leverage a more modern feature set.  You have entered " + conf['engine_version'][0] + " whereas the latest version is: " + latest_redis_version + ".\nhttps://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html"
+                    if version.parse(engine_version) < version.parse(latest_redis_version):
+                        self.name = "Ensure Redis version is up to date to leverage a more modern feature set.  You have entered " + \
+                            conf['engine_version'][0] + " whereas the latest version is: " + latest_redis_version + \
+                            ".\nhttps://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/supported-engine-versions.html"
                         return CheckResult.FAILED
         return CheckResult.PASSED
 

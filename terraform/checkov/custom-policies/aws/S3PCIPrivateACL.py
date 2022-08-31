@@ -11,7 +11,8 @@ class S3PCIPrivateACL(BaseResourceCheck):
         supported_resources = ['aws_s3_bucket']
         # CheckCategories are defined in models/enums.py
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
-        super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
+        super().__init__(name=name, id=id, categories=categories,
+                         supported_resources=supported_resources)
 
     def scan_resource_conf(self, conf):
         """

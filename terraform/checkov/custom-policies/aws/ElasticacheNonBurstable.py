@@ -3,14 +3,18 @@ from checkov.terraform.checks.resource.base_resource_check import BaseResourceCh
 from checkov.common.models.enums import CheckResult, CheckCategories
 
 latest_instances = ['cache.t3.micro', 'cache.t3.small', 'cache.t3.medium']
+
+
 class ElasticacheNonBurstable(BaseResourceCheck):
     def __init__(self):
         name = "Ensure clusters are deployed using T3 instances or non-burstable instance types for production workloads"
         id = "CKV_IBT_002"
-        supported_resources = ['aws_elasticache_replication_group', 'aws_elasticache_cluster']
+        supported_resources = [
+            'aws_elasticache_replication_group', 'aws_elasticache_cluster']
         # Look at checkov/common/models/enums.py for options
         categories = [CheckCategories.BACKUP_AND_RECOVERY]
-        super().__init__(name=name, id=id, categories=categories, supported_resources=supported_resources)
+        super().__init__(name=name, id=id, categories=categories,
+                         supported_resources=supported_resources)
 
     def scan_resource_conf(self, conf):
         """
@@ -33,5 +37,6 @@ class ElasticacheNonBurstable(BaseResourceCheck):
                 if node_type in latest_instances:
                     return CheckResult.PASSED
                 return CheckResult.FAILED
+
 
 scanner = ElasticacheNonBurstable()
